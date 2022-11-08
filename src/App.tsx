@@ -85,7 +85,7 @@ export function App() {
           <Tooltip title={errors.cpf ? '❌ CPF obrigatório' : ''}>
             <Box>
               <Input
-                label="Cpf"
+                label="CPF"
                 id="cpf"
                 type="number"
                 inputProps={register('cpf')}
@@ -164,7 +164,7 @@ export function App() {
           <Tooltip title={errors.cep ? '❌ Cep obrigatório' : ''}>
             <Box>
               <Input
-                label="Cep"
+                label="CEP"
                 id="cep"
                 type="number"
                 inputProps={register('cep')}
