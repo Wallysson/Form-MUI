@@ -5,6 +5,8 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import { Container, Tooltip, Typography } from '@mui/material'
+import { ToastContainer, Flip, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 interface DataProps {
   nome: string
@@ -37,10 +39,22 @@ export function App() {
     resolver: yupResolver(schema)
   })
 
-  const onSubmit = (data: DataProps) => console.log(data)
+  const onSubmit = (data: DataProps) => {
+    console.log(data)
+    toast.success('Formulário salvo.', {
+      icon: '✍🏼',
+      position: 'top-right',
+      theme: 'light',
+      autoClose: 1200,
+      progressStyle: {
+        background: '#008D48'
+      }
+    })
+  }
 
   return (
     <Container component="main" maxWidth="sm">
+      <ToastContainer />
       <Box
         sx={{
           display: 'flex',
@@ -56,7 +70,7 @@ export function App() {
           onSubmit={handleSubmit(onSubmit)}
           sx={{ width: '100%' }}
         >
-          <Tooltip title={errors.nome ? 'Nome obrigatório' : ''}>
+          <Tooltip title={errors.nome ? '❌ Nome obrigatório' : ''}>
             <Box>
               <Input
                 label="Nome"
@@ -68,7 +82,7 @@ export function App() {
               />
             </Box>
           </Tooltip>
-          <Tooltip title={errors.cpf ? 'CPF obrigatório' : ''}>
+          <Tooltip title={errors.cpf ? '❌ CPF obrigatório' : ''}>
             <Box>
               <Input
                 label="Cpf"
@@ -81,7 +95,7 @@ export function App() {
               />
             </Box>
           </Tooltip>
-          <Tooltip title={errors.email ? 'Email obrigatório' : ''}>
+          <Tooltip title={errors.email ? '❌ Email obrigatório' : ''}>
             <Box>
               <Input
                 label="Email"
@@ -100,7 +114,7 @@ export function App() {
               width: '100%'
             }}
           >
-            <Tooltip title={errors.endereco ? 'Endereço obrigatório' : ''}>
+            <Tooltip title={errors.endereco ? '❌ Endereço obrigatório' : ''}>
               <Box sx={{ width: '100%' }}>
                 <Input
                   label="Endereço"
@@ -111,7 +125,7 @@ export function App() {
                 />
               </Box>
             </Tooltip>
-            <Tooltip title={errors.numEndereco ? 'Obrigatório.' : ''}>
+            <Tooltip title={errors.numEndereco ? '❌ Obrigatório.' : ''}>
               <Box>
                 <Input
                   label="Nº"
@@ -125,7 +139,7 @@ export function App() {
               </Box>
             </Tooltip>
           </Box>
-          <Tooltip title={errors.bairro ? 'Bairro obrigatório' : ''}>
+          <Tooltip title={errors.bairro ? '❌ Bairro obrigatório' : ''}>
             <Box>
               <Input
                 label="Bairro"
@@ -136,7 +150,7 @@ export function App() {
               />
             </Box>
           </Tooltip>
-          <Tooltip title={errors.cidade ? 'Cidade obrigatório' : ''}>
+          <Tooltip title={errors.cidade ? '❌ Cidade obrigatório' : ''}>
             <Box>
               <Input
                 label="Cidade"
@@ -147,7 +161,7 @@ export function App() {
               />
             </Box>
           </Tooltip>
-          <Tooltip title={errors.cep ? 'Cep obrigatório' : ''}>
+          <Tooltip title={errors.cep ? '❌ Cep obrigatório' : ''}>
             <Box>
               <Input
                 label="Cep"

@@ -23,6 +23,7 @@ export function Input({
       type={type}
       autoFocus
       fullWidth
+      variant="standard"
       // required
       {...rest}
     />

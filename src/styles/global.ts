@@ -70,6 +70,14 @@ export const globalCss = createTheme({
           justifyContent: 'center'
         }
       }
+    },
+    MuiTooltip: {
+      styleOverrides: {
+        tooltip: {
+          backgroundColor: 'red',
+          color: '#fff'
+        }
+      }
     }
   },
 })
