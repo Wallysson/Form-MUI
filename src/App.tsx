@@ -5,8 +5,9 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import { Container, Tooltip, Typography } from '@mui/material'
-import { ToastContainer, Flip, toast } from 'react-toastify'
+import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { FocusEvent } from 'react'
 
 interface DataProps {
   nome: string
@@ -34,6 +35,8 @@ export function App() {
   const {
     register,
     handleSubmit,
+    setValue,
+    setFocus,
     formState: { errors }
   } = useForm<DataProps>({
     resolver: yupResolver(schema)
@@ -50,6 +53,18 @@ export function App() {
         background: '#008D48'
       }
     })
+  }
+
+  const fetchCEP = async (event: FocusEvent<HTMLInputElement>) => {
+    const cep = event.target.value.replace(/\D/g, '')
+    await fetch(`https://viacep.com.br/ws/${cep}/json/`).then(response =>
+      response.json().then(data => {
+        setValue('endereco', data.logradouro)
+        setValue('bairro', data.bairro)
+        setValue('cidade', data.localidade)
+        setFocus('numEndereco')
+      })
+    )
   }
 
   return (
@@ -107,6 +122,19 @@ export function App() {
               />
             </Box>
           </Tooltip>
+          <Tooltip title={errors.cep ? '❌ Cep obrigatório' : ''}>
+            <Box>
+              <Input
+                label="CEP"
+                id="cep"
+                type="number"
+                inputProps={register('cep')}
+                color={errors.cep ? 'error' : 'primary'}
+                error={Boolean(errors.cep)}
+                onBlur={fetchCEP}
+              />
+            </Box>
+          </Tooltip>
           <Box
             sx={{
               display: 'flex',
@@ -158,18 +186,6 @@ export function App() {
                 inputProps={register('cidade')}
                 color={errors.cidade ? 'error' : 'primary'}
                 error={Boolean(errors.cidade)}
-              />
-            </Box>
-          </Tooltip>
-          <Tooltip title={errors.cep ? '❌ Cep obrigatório' : ''}>
-            <Box>
-              <Input
-                label="CEP"
-                id="cep"
-                type="number"
-                inputProps={register('cep')}
-                color={errors.cep ? 'error' : 'primary'}
-                error={Boolean(errors.cep)}
               />
             </Box>
           </Tooltip>
