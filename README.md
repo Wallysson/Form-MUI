@@ -30,6 +30,7 @@ Utilizar React e Material UI para criar um formulário ficticio para cadastro de
 - Utilizar Typescript; ✔️
 - Validar as informações dos inputs ao clicar no botão salvar; ✔️
 - Notificação quando um cliente submeter o formulário; ✔️
+- Utilizar [ViaCEP](https://viacep.com.br/) pra trazer as informações do cliente de acordo com o CEP ; ⏳
 - Mascáras nos inputs CPF e CEP; ⏳
 
 ## 🖼️ Previews
